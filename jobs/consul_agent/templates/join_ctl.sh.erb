@@ -15,6 +15,9 @@ case $1 in
     mkdir -p $RUN_DIR
     chown -R vcap:vcap $RUN_DIR
 
+    ulimit -v unlimited
+    ulimit -n 10000
+
     echo $$ > $PIDFILE
 
     until $PKG/bin/consul join -wan <%= p("consul.agent.servers.wan").join(" ") %>; do

@@ -1,7 +1,7 @@
 check process consul_agent
   with pidfile /var/vcap/sys/run/consul_agent/consul_agent.pid
   start program "/var/vcap/jobs/consul_agent/bin/agent_ctl start"
-    as uid vcap and gid vcap with timeout 60 seconds
+    with timeout 60 seconds
   stop program "/var/vcap/jobs/consul_agent/bin/agent_ctl stop"
   group vcap
 
@@ -10,6 +10,5 @@ check process consul-join
   with pidfile /var/vcap/sys/run/consul_agent/consul-join.pid
   start program "/var/vcap/jobs/consul_agent/bin/join_ctl start"
   stop program "/var/vcap/jobs/consul_agent/bin/join_ctl stop"
-  group vcap
   depends on consul_agent
 <% end %>
